@@ -47,6 +47,6 @@ public class UsersController {
 
 		User entity = new User(email, passwordEncoder.encode(password), Authority.ROLE_USER);
 		repository.saveAndFlush(entity);
-		return "layouts/complete";
+		return "sessions/new";
 	}
 }
