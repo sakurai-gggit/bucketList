@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>bucketList</title>
+</head>
+
+<body>
+	<h1>Sign in</h1>
+	<form method="post" th:action="@{/user}" th:object="${form}">
+		<div class="mb-3">
+			<label class="form-label text-white" for="user_email">Email</label>
+			<input type="text" class="form-control" th:field="*{email}" />
+
+		</div>
+		<div class="mb-3">
+			<label class="form-label text-white" for="user_password">Password</label>
+			<input class="form-control" type="password" th:field="*{password}" />
+
+			</p>
+		</div>
+		<div class="mb-3">
+			<label class="form-label text-white" for="user_password_confirmation">Password
+				confirmation</label>
+			<input type="password" class="form-control" th:field="*{passwordConfirmation}" />
+
+		</div>
+		<input type="submit" value="登録" class="btn w-100 btn-outline-light" />
+	</form>
+</body>
+
+</html>
