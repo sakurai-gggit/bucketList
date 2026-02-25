@@ -49,4 +49,10 @@ public class UsersController {
 		repository.saveAndFlush(entity);
 		return "sessions/new";
 	}
+
+	@GetMapping("/pages/main")
+	public String mainPage() {
+		return "/pages/main";
+	}
+
 }
