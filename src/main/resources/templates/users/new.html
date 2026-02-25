@@ -12,18 +12,20 @@
 		<div class="mb-3">
 			<label class="form-label text-white" for="user_email">Email</label>
 			<input type="text" class="form-control" th:field="*{email}" />
-
+			<p th:if="${#fields.hasErrors('email')}" class="error-message" th:errors="*{email}"></p>
 		</div>
 		<div class="mb-3">
 			<label class="form-label text-white" for="user_password">Password</label>
 			<input class="form-control" type="password" th:field="*{password}" />
-
+			<p th:if="${#fields.hasErrors('password')}" class="error-message" th:errors="*{password}">
 			</p>
 		</div>
 		<div class="mb-3">
 			<label class="form-label text-white" for="user_password_confirmation">Password
 				confirmation</label>
 			<input type="password" class="form-control" th:field="*{passwordConfirmation}" />
+			<p th:if="${#fields.hasErrors('passwordConfirmation')}" class="error-message"
+				th:errors="*{passwordConfirmation}"></p>
 
 		</div>
 		<input type="submit" value="登録" class="btn w-100 btn-outline-light" />
