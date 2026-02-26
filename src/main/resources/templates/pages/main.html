@@ -1,1 +1,27 @@
 <h2>メインページです</h2>
+<section id="tasks">
+	<ul>
+		<li th:each="task : ${list}">
+			<article class="task">
+				<ul>
+
+
+					<li>
+						<pre class="body" th:text="${task.body}"></pre>
+					<li>
+
+				</ul>
+			</article>
+		</li>
+	</ul>
+</section>
+
+<form method="post" action="#" th:action="@{/path}" th:object="${form}">
+	<section id="form">
+
+		<div><textarea th:field="*{body}"></textarea></div>
+
+		<button type="submit">送信</button>
+	</section>
+
+</form>

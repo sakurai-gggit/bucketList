@@ -1,5 +1,7 @@
 package com.example.bucketList.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -12,9 +14,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.example.bucketList.entity.Task;
 import com.example.bucketList.entity.User;
 import com.example.bucketList.entity.User.Authority;
+import com.example.bucketList.factory.TaskFactory;
 import com.example.bucketList.form.UserForm;
+import com.example.bucketList.repository.TaskRepository;
 import com.example.bucketList.repository.UserRepository;
 
 @Controller
@@ -23,7 +28,9 @@ public class UsersController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	@Autowired
-	private UserRepository repository;
+	private UserRepository userRepository;
+	@Autowired
+	private TaskRepository taskRepository;
 
 	@GetMapping("/users/new")
 	public String newUser(Model model) {
@@ -37,7 +44,7 @@ public class UsersController {
 		String email = form.getEmail();
 		String password = form.getPassword();
 
-		if (repository.findByUsername(email) != null) {
+		if (userRepository.findByUsername(email) != null) {
 			FieldError fieldError = new FieldError(result.getObjectName(), "email", "その E メールはすでに使用されています。");
 			result.addError(fieldError);
 		}
@@ -46,13 +53,33 @@ public class UsersController {
 		}
 
 		User entity = new User(email, passwordEncoder.encode(password), Authority.ROLE_USER);
-		repository.saveAndFlush(entity);
+		userRepository.saveAndFlush(entity);
 		return "sessions/new";
 	}
 
 	@GetMapping("/pages/main")
-	public String mainPage() {
+
+	public String mainPage(Model model) {
+		model.addAttribute("form", TaskFactory.newTask());
+		model = this.setList(model);
 		return "/pages/main";
+
 	}
 
+	//	タスクを登録する
+	@PostMapping("/path")
+	public String taskCreate(@ModelAttribute("form") Task form, BindingResult result,
+			Model model) {
+		taskRepository.saveAndFlush(TaskFactory.createTask(form));
+		model.addAttribute("form", TaskFactory.newTask());
+		model = this.setList(model);
+
+		return "redirect:/pages/main";
+	}
+
+	private Model setList(Model model) {
+		List<Task> list = taskRepository.findAll();
+		model.addAttribute("list", list);
+		return model;
+	}
 }
