@@ -25,15 +25,15 @@ public class User implements UserDetails {
 
 	}
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.UUID)
+	private String userId;
+
 	@Column
 	private String username;
 
 	@Column
 	private String password;
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long userId;
 
 	@OneToMany(mappedBy = "user")
 	private List<Task> tasks;
@@ -66,7 +66,7 @@ public class User implements UserDetails {
 		return true;
 	}
 
-	public Long getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 

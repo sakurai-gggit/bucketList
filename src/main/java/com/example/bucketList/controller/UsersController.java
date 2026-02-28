@@ -1,5 +1,6 @@
 package com.example.bucketList.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,8 +69,10 @@ public class UsersController {
 	//	タスクを登録する
 	@PostMapping("/path")
 	public String taskCreate(@ModelAttribute("form") Task form, BindingResult result,
-			Model model, User user) {
-		taskRepository.saveAndFlush(TaskFactory.createTask(form, user));
+			Model model, Principal principal) {
+		String email = principal.getName();
+		User currentUser = userRepository.findByUsername(email);
+		taskRepository.saveAndFlush(TaskFactory.createTask(form, currentUser));
 		model.addAttribute("form", TaskFactory.newTask());
 		model = this.setList(model);
 
