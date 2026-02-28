@@ -3,14 +3,9 @@
 	<ul>
 		<li th:each="task : ${list}">
 			<article class="task">
-				<ul>
 
+				<pre class="body" th:text="${task.body}"></pre>
 
-					<li>
-						<pre class="body" th:text="${task.body}"></pre>
-					<li>
-
-				</ul>
 			</article>
 		</li>
 	</ul>

@@ -1,12 +1,9 @@
 package com.example.bucketList.factory;
 
 import java.util.Date;
-import java.util.UUID;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.example.bucketList.entity.Task;
+import com.example.bucketList.entity.User;
 
 public class TaskFactory {
 
@@ -14,20 +11,17 @@ public class TaskFactory {
 
 	}
 
-	//新規のタスクを生成する
+	//空白のタスクを生成する
 	public static Task newTask() {
 		Task task = new Task();
 		return task;
 	}
 
 	//	入力内容を設定したタスクを生成する
-	public static Task createTask(Task task) {
-		String id = UUID.randomUUID().toString();
-		task.setId(id);
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		task.setAuthor(auth.getName());
+	public static Task createTask(Task task, User user) {
 		Date current = new Date();
 		task.setCreatedDate(current);
+		task.setUser(user);
 		return task;
 	}
 

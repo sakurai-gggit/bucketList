@@ -4,34 +4,38 @@ import java.util.Date;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 import lombok.Data;
 
 @Entity
-@Table(name="tasks")
+@Table(name = "tasks")
 @Data
 public class Task {
-	
-//	ID
+
+	//	ID
 	@Id
 	@Column
-	private String id =null;
-	
-//	user
-	@Column(nullable=false)
-	private String author=null;
-	
-//	内容
-	@Column(length=300,nullable=false)
-	private String body=null;
-	
-//	登録日時
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long taskId = null;
+
+	@ManyToOne
+	@JoinColumn(name = "userId", nullable = false)
+	private User user;
+
+	//	内容
+	@Column(length = 300, nullable = false)
+	private String body = null;
+
+	//	登録日時
 	private Date createdDate = null;
-	
-//	削除済
+
+	//	削除済
 	private boolean deleted = false;
-	
 
 }

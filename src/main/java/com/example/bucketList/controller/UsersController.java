@@ -16,7 +16,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.bucketList.entity.Task;
 import com.example.bucketList.entity.User;
-import com.example.bucketList.entity.User.Authority;
 import com.example.bucketList.factory.TaskFactory;
 import com.example.bucketList.form.UserForm;
 import com.example.bucketList.repository.TaskRepository;
@@ -52,7 +51,7 @@ public class UsersController {
 			return "users/new";
 		}
 
-		User entity = new User(email, passwordEncoder.encode(password), Authority.ROLE_USER);
+		User entity = new User(email, passwordEncoder.encode(password));
 		userRepository.saveAndFlush(entity);
 		return "sessions/new";
 	}
@@ -69,8 +68,8 @@ public class UsersController {
 	//	タスクを登録する
 	@PostMapping("/path")
 	public String taskCreate(@ModelAttribute("form") Task form, BindingResult result,
-			Model model) {
-		taskRepository.saveAndFlush(TaskFactory.createTask(form));
+			Model model, User user) {
+		taskRepository.saveAndFlush(TaskFactory.createTask(form, user));
 		model.addAttribute("form", TaskFactory.newTask());
 		model = this.setList(model);
 
