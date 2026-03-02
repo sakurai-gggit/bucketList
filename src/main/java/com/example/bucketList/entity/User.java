@@ -1,16 +1,15 @@
 package com.example.bucketList.entity;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -19,13 +18,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 @Table(name = "users")
-public class User  implements UserDetails {
-	public User(String email, String password, Authority authority) {
+public class User implements UserDetails {
+	public User(String email, String password) {
 		this.username = email;
 		this.password = password;
-		this.authority = authority;
 
 	}
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.UUID)
+	private String userId;
 
 	@Column
 	private String username;
@@ -33,26 +35,15 @@ public class User  implements UserDetails {
 	@Column
 	private String password;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long userId;
-
-	@Column(nullable = false)
-	@Enumerated(EnumType.STRING)
-	private Authority authority;
+	@OneToMany(mappedBy = "user")
+	private List<Task> tasks;
 
 	public User() {
 	}
 
-	public enum Authority {
-		ROLE_USER, ROLE_ADMIN
-	};
-
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<GrantedAuthority> authorities = new ArrayList<>();
-		authorities.add(new SimpleGrantedAuthority(authority.toString()));
-		return authorities;
+		return Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"));
 	}
 
 	@Override
@@ -74,7 +65,8 @@ public class User  implements UserDetails {
 	public boolean isEnabled() {
 		return true;
 	}
-	public Long getUserId() {
+
+	public String getUserId() {
 		return userId;
 	}
 
