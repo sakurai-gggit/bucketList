@@ -2,11 +2,14 @@
 <section id="tasks">
 	<ul>
 		<li th:each="task : ${list}">
-			<article class="task">
-
-				<pre class="body" th:text="${task.body}"></pre>
-
-			</article>
+			<form th:action="@{/completed}" method="post">
+				<input type="hidden" name="taskId" th:value="${task.taskId}">
+				<button type="submit" class="task-button">
+					<article class="task" th:classappend="${task.completed}?'is-done':''">
+						<pre class="body" th:text="${task.body}"></pre>
+					</article>
+				</button>
+			</form>
 		</li>
 	</ul>
 </section>
