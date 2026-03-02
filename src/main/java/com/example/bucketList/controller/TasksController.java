@@ -54,6 +54,10 @@ public class TasksController {
 	public String mainPage(Model model) {
 		model.addAttribute("form", TaskFactory.newTask());
 		model = this.setList(model);
+		long totalTasks = taskRepository.countByDeletedFalse();
+		long completedTasks = taskRepository.countByCompletedTrue();
+		model.addAttribute("totalTasks", totalTasks);
+		model.addAttribute("completedTasks", completedTasks);
 		return "pages/main";
 
 	}

@@ -1,4 +1,7 @@
 <h2>メインページです</h2>
+<div th:text="|${completedTasks} / ${totalTasks}|">
+	0/0
+</div>
 <section id="tasks">
 	<ul>
 		<li th:each="task : ${list}">
