@@ -40,6 +40,16 @@ public class TasksController {
 		return "redirect:/pages/main";
 	}
 
+	//	タスクを編集する
+	@PostMapping("/update")
+	public String taskUpdate(@RequestParam Long taskId, @RequestParam String body) {
+		Task task = taskRepository.findById(taskId)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid task Id:" + taskId));
+		task.setBody(body);
+		taskRepository.saveAndFlush(task);
+		return "redirect:/edit";
+	}
+
 	//	タスクを達成済み、未達成にする
 	@PostMapping("/completed")
 	public String toggleTask(@RequestParam Long taskId) {
@@ -59,7 +69,13 @@ public class TasksController {
 		model.addAttribute("totalTasks", totalTasks);
 		model.addAttribute("completedTasks", completedTasks);
 		return "pages/main";
+	}
 
+	@GetMapping("/edit")
+	public String editPage(Model model) {
+		model.addAttribute("form", TaskFactory.newTask());
+		model = this.setList(model);
+		return "pages/edit";
 	}
 
 	private Model setList(Model model) {

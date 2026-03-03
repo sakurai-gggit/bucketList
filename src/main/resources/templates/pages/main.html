@@ -2,10 +2,11 @@
 <div th:text="|${completedTasks} / ${totalTasks}|">
 	0/0
 </div>
+<a th:href="@{/edit}">編集ページへ</a>
 <section id="tasks">
 	<ul>
 		<li th:each="task : ${list}">
-			<form th:action="@{/completed}" method="post">
+			<form method="post" th:action="@{/completed}">
 				<input type="hidden" name="taskId" th:value="${task.taskId}">
 				<button type="submit" class="task-button">
 					<article class="task" th:classappend="${task.completed}?'is-done':''">
@@ -19,10 +20,7 @@
 
 <form method="post" action="#" th:action="@{/path}" th:object="${form}">
 	<section id="form">
-
 		<div><textarea th:field="*{body}"></textarea></div>
-
 		<button type="submit">送信</button>
 	</section>
-
 </form>
