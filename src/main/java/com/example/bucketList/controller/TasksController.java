@@ -28,7 +28,7 @@ public class TasksController {
 	private UserRepository userRepository;
 
 	//	タスクを登録する
-	@PostMapping("/path")
+	@PostMapping("/add")
 	public String taskCreate(@ModelAttribute("form") Task form, BindingResult result,
 			Model model, Principal principal) {
 		String email = principal.getName();
@@ -37,7 +37,7 @@ public class TasksController {
 		model.addAttribute("form", TaskFactory.newTask());
 		model = this.setList(model);
 
-		return "redirect:/pages/main";
+		return "redirect:/main";
 	}
 
 	//	タスクを編集する
@@ -57,10 +57,10 @@ public class TasksController {
 				.orElseThrow(() -> new IllegalArgumentException("Invalid task Id:" + taskId));
 		task.setCompleted(!task.isCompleted());
 		taskRepository.save(task);
-		return "redirect:/pages/main";
+		return "redirect:/main";
 	}
 
-	@GetMapping("/pages/main")
+	@GetMapping("/main")
 	public String mainPage(Model model) {
 		model.addAttribute("form", TaskFactory.newTask());
 		model = this.setList(model);
