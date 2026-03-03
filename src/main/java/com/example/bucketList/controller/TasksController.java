@@ -28,7 +28,7 @@ public class TasksController {
 	private UserRepository userRepository;
 
 	//	タスクを登録する
-	@PostMapping("/path")
+	@PostMapping("/add")
 	public String taskCreate(@ModelAttribute("form") Task form, BindingResult result,
 			Model model, Principal principal) {
 		String email = principal.getName();
@@ -37,7 +37,17 @@ public class TasksController {
 		model.addAttribute("form", TaskFactory.newTask());
 		model = this.setList(model);
 
-		return "redirect:/pages/main";
+		return "redirect:/main";
+	}
+
+	//	タスクを編集する
+	@PostMapping("/update")
+	public String taskUpdate(@RequestParam Long taskId, @RequestParam String body) {
+		Task task = taskRepository.findById(taskId)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid task Id:" + taskId));
+		task.setBody(body);
+		taskRepository.saveAndFlush(task);
+		return "redirect:/edit";
 	}
 
 	//	タスクを達成済み、未達成にする
@@ -47,10 +57,10 @@ public class TasksController {
 				.orElseThrow(() -> new IllegalArgumentException("Invalid task Id:" + taskId));
 		task.setCompleted(!task.isCompleted());
 		taskRepository.save(task);
-		return "redirect:/pages/main";
+		return "redirect:/main";
 	}
 
-	@GetMapping("/pages/main")
+	@GetMapping("/main")
 	public String mainPage(Model model) {
 		model.addAttribute("form", TaskFactory.newTask());
 		model = this.setList(model);
@@ -59,7 +69,13 @@ public class TasksController {
 		model.addAttribute("totalTasks", totalTasks);
 		model.addAttribute("completedTasks", completedTasks);
 		return "pages/main";
+	}
 
+	@GetMapping("/edit")
+	public String editPage(Model model) {
+		model.addAttribute("form", TaskFactory.newTask());
+		model = this.setList(model);
+		return "pages/edit";
 	}
 
 	private Model setList(Model model) {

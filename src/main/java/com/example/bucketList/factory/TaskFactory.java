@@ -25,13 +25,6 @@ public class TaskFactory {
 		return task;
 	}
 
-	//	更新内容を設定したタスクを生成する
-	public static Task updateTask(Task task, Task form) {
-
-		task.setBody(form.getBody());
-		return task;
-	}
-
 	//	削除を設定したタスクを生成する
 	public static Task deleteTask(Task task) {
 		task.setDeleted(true);
