@@ -30,12 +30,12 @@ public class TasksController {
 	//	タスクを登録する
 	@PostMapping("/add")
 	public String taskCreate(@ModelAttribute("form") Task form, BindingResult result,
-			Model model, Principal principal) {
+			Model model, Principal principal, @RequestParam(name = "order", defaultValue = "default") String order) {
 		String email = principal.getName();
 		User currentUser = userRepository.findByUsername(email);
 		taskRepository.saveAndFlush(TaskFactory.createTask(form, currentUser));
 		model.addAttribute("form", TaskFactory.newTask());
-		model = this.setList(model);
+		model = this.setList(model, order);
 
 		return "redirect:/main";
 	}
@@ -66,10 +66,11 @@ public class TasksController {
 	}
 
 	@GetMapping("/main")
-	public String mainPage(Model model) {
+	public String mainPage(Model model, @RequestParam(name = "order", defaultValue = "default") String order) {
 		model.addAttribute("form", TaskFactory.newTask());
-		model = this.setList(model);
-		long totalTasks = taskRepository.countByDeletedFalse();
+		model = this.setList(model, order);
+		model.addAttribute("currentOrder", order);
+		long totalTasks = taskRepository.count();
 		long completedTasks = taskRepository.countByCompletedTrue();
 		model.addAttribute("totalTasks", totalTasks);
 		model.addAttribute("completedTasks", completedTasks);
@@ -77,14 +78,26 @@ public class TasksController {
 	}
 
 	@GetMapping("/edit")
-	public String editPage(Model model) {
+	public String editPage(Model model, @RequestParam(name = "order", defaultValue = "default") String order) {
 		model.addAttribute("form", TaskFactory.newTask());
-		model = this.setList(model);
+		model = this.setList(model, order);
 		return "pages/edit";
 	}
 
-	private Model setList(Model model) {
-		List<Task> list = taskRepository.findAll(Sort.by(Sort.Direction.ASC, "taskId"));
+	@GetMapping("/menu")
+	public String menuPage(Model model, @RequestParam(name = "order", defaultValue = "default") String order) {
+		model.addAttribute("currentOrder", order);
+		return "pages/menu";
+	}
+
+	private Model setList(Model model, @RequestParam(name = "order", defaultValue = "default") String order) {
+		Sort sort;
+		if ("status".equals(order)) {
+			sort = Sort.by(Sort.Direction.ASC, "completed").and(Sort.by(Sort.Direction.ASC, "taskId"));
+		} else {
+			sort = Sort.by(Sort.Direction.ASC, "taskId");
+		}
+		List<Task> list = taskRepository.findAll(sort);
 		model.addAttribute("list", list);
 		return model;
 	}

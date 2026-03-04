@@ -36,10 +36,6 @@ public class Task {
 	@Column
 	private Date createdDate = null;
 
-	//	削除済
-	@Column
-	private boolean deleted = false;
-
 	//	達成状況
 	@Column
 	private boolean completed = false;
