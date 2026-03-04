@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<h2>menu</h2>
+<a th:href="@{/main(order=${currentOrder})}">戻る</a>
+	<a th:href="@{/main(order=${currentOrder == 'status' ? 'default' : 'status'})}" class="btn">
+		<span th:text="${currentOrder =='status' ? 'ソート解除':'未達成タスクでソート'}"></span>
+	</a>
+
+</body>
+
+</html>

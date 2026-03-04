@@ -3,6 +3,7 @@
 	0/0
 </div>
 <a th:href="@{/edit}">編集ページへ</a>
+<a th:href="@{/menu(order=${currentOrder})}">menu</a>
 <section id="tasks">
 	<ul>
 		<li th:each="task : ${list}">

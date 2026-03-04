@@ -25,10 +25,4 @@ public class TaskFactory {
 		return task;
 	}
 
-	//	削除を設定したタスクを生成する
-	public static Task deleteTask(Task task) {
-		task.setDeleted(true);
-		return task;
-	}
-
 }

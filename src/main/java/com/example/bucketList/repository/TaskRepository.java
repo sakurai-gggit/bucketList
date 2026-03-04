@@ -6,7 +6,6 @@ import com.example.bucketList.entity.Task;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
-	long countByDeletedFalse();
 
 	long countByCompletedTrue();
 
