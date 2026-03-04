@@ -43,8 +43,7 @@ public class TasksController {
 	//	タスクを編集する
 	@PostMapping("/update")
 	public String taskUpdate(@RequestParam Long taskId, @RequestParam String body) {
-		Task task = taskRepository.findById(taskId)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid task Id:" + taskId));
+		Task task = getTask(taskId);
 		task.setBody(body);
 		taskRepository.saveAndFlush(task);
 		return "redirect:/edit";
@@ -53,11 +52,17 @@ public class TasksController {
 	//	タスクを達成済み、未達成にする
 	@PostMapping("/completed")
 	public String toggleTask(@RequestParam Long taskId) {
-		Task task = taskRepository.findById(taskId)
-				.orElseThrow(() -> new IllegalArgumentException("Invalid task Id:" + taskId));
+		Task task = getTask(taskId);
 		task.setCompleted(!task.isCompleted());
 		taskRepository.save(task);
 		return "redirect:/main";
+	}
+
+	//	タスクを削除する
+	@PostMapping("/delete")
+	public String deleteTask(@RequestParam Long taskId) {
+		taskRepository.deleteById(taskId);
+		return "redirect:/edit";
 	}
 
 	@GetMapping("/main")
@@ -84,4 +89,9 @@ public class TasksController {
 		return model;
 	}
 
+	private Task getTask(Long taskId) {
+		return taskRepository.findById(taskId)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid task Id:" + taskId));
+
+	}
 }

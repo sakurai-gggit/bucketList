@@ -12,13 +12,18 @@
 	<section>
 		<ul>
 			<li th:each="task : ${list}">
-				<form method="post" th:action="@{/update}">
-					<input type="hidden" name="taskId" th:value="${task.taskId}">
-					<article class="task">
+
+				<article class="task">
+					<form method="post" th:action="@{/delete}">
+						<input type="hidden" th:value="${task.taskId}" name="taskId">
+						<button type="submit">削除</button>
+					</form>
+					<form method="post" th:action="@{/update}">
+						<input type="hidden" name="taskId" th:value="${task.taskId}">
 						<textarea class="body" name="body" th:text="${task.body}"></textarea>
 						<button type="submit">確定</button>
-					</article>
-				</form>
+					</form>
+				</article>
 			</li>
 		</ul>
 	</section>
