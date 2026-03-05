@@ -1,27 +1,41 @@
-<h2>メインページです</h2>
-<div th:text="|${completedTasks} / ${totalTasks}|">
-	0/0
-</div>
-<a th:href="@{/edit}">編集ページへ</a>
-<a th:href="@{/menu(order=${currentOrder})}">menu</a>
-<section id="tasks">
-	<ul>
-		<li th:each="task : ${list}">
-			<form method="post" th:action="@{/completed}">
-				<input type="hidden" name="taskId" th:value="${task.taskId}">
-				<button type="submit" class="task-button">
-					<article class="task" th:classappend="${task.completed}?'is-done':''">
-						<pre class="body" th:text="${task.body}"></pre>
-					</article>
-				</button>
-			</form>
-		</li>
-	</ul>
-</section>
+<!DOCTYPE html>
+<html>
 
-<form method="post" action="#" th:action="@{/add}" th:object="${form}">
-	<section id="form">
-		<div><textarea th:field="*{body}"></textarea></div>
-		<button type="submit">送信</button>
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<title>bucketList</title>
+</head>
+
+<body>
+	
+	<div th:text="|${completedTasks} / ${totalTasks}|">
+		0/0
+	</div>
+	<a th:href="@{/edit}">編集ページへ</a>
+	<a th:href="@{/menu(order=${currentOrder})}">menu</a>
+	<section id="tasks">
+		<ul>
+			<li th:each="task : ${list}">
+				<form method="post" th:action="@{/completed}">
+					<input type="hidden" name="taskId" th:value="${task.taskId}">
+					<button type="submit" class="task-button">
+						<article class="task" th:classappend="${task.completed}?'is-done':''">
+							<pre class="body" th:text="${task.body}"></pre>
+						</article>
+					</button>
+				</form>
+			</li>
+		</ul>
 	</section>
-</form>
+
+	<form method="post" action="#" th:action="@{/add}" th:object="${form}">
+		<section id="form">
+			<div><textarea th:field="*{body}"></textarea></div>
+			<button type="submit">送信</button>
+		</section>
+	</form>
+</body>
+
+</html>
