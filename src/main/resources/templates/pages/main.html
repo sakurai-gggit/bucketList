@@ -3,18 +3,20 @@
 
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
 	<link rel="stylesheet" th:href="@{/css/style.css}">
 	<title>bucketList</title>
 </head>
 
 <body>
-	
-	<div th:text="|${completedTasks} / ${totalTasks}|">
-		0/0
-	</div>
-	<a th:href="@{/edit}">編集ページへ</a>
-	<a th:href="@{/menu(order=${currentOrder})}">menu</a>
+	<header>
+		<a th:href="@{/menu(order=${currentOrder})}">menu</a>
+		<div th:text="|${completedTasks} / ${totalTasks}|">
+			0/0
+		</div>
+		<a th:href="@{/edit}">編集</a>
+	</header>
 	<section id="tasks">
 		<ul>
 			<li th:each="task : ${list}">
@@ -30,11 +32,11 @@
 		</ul>
 	</section>
 
-	<form method="post" action="#" th:action="@{/add}" th:object="${form}">
-		<section id="form">
-			<div><textarea th:field="*{body}"></textarea></div>
+	<form method="post" action="#" th:action="@{/add}" th:object="${form}" id="footer-container">
+		<div class="form-inner">
+			<textarea th:field="*{body}"></textarea>
 			<button type="submit">送信</button>
-		</section>
+		</div>
 	</form>
 </body>
 

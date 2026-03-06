@@ -1,1 +1,49 @@
 @charset "UTF-8";
+body {
+	max-width: 500px;
+	width: 100%;
+	margin: 20px auto;
+}
+
+li {
+	list-style: none;
+}
+
+ul {
+	padding: 0;
+}
+
+div {
+	text-align: center;
+}
+
+.form-inner {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	padding: 10px;
+	display: flex;
+	margin: auto;
+	width: fit-content;
+	gap: 10px;
+}
+
+#footer-container {
+	border-top: 1px solid;
+}
+
+#tasks {
+	text-align: center;
+	margin: 30px auto;
+}
+
+header {
+	margin: 0 10px;
+	display: flex;
+	justify-content: space-between;
+}
+
+.task-button {
+	width: 100%;
+}
