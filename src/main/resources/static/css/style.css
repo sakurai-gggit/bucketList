@@ -1,4 +1,5 @@
 @charset "UTF-8";
+
 body {
 	max-width: 500px;
 	width: 100%;
@@ -14,6 +15,7 @@ ul {
 }
 
 div {
+	color: #88f1d6;
 	text-align: center;
 }
 
@@ -26,11 +28,12 @@ div {
 }
 
 #footer-container {
+	background-color: white;
 	position: fixed;
-		bottom: 0;
-		right: 0;
-		left: 0;
-	border-top: 1px solid;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	border-top: 2px solid white;
 }
 
 #tasks {
@@ -46,4 +49,24 @@ header {
 
 .task-button {
 	width: 100%;
+	color: white;
+	cursor: pointer;
+	appearance: none;
+	border: none;
+	background-color: #88f1d6;
 }
+textarea{
+	appearance: none;
+	    border: none;
+	    background-color: #88f1d6;
+}
+.input-form{
+	appearance: none;
+	    border: none;
+	    color: white;
+	    background-color: #88f1d6;
+	    border-radius: 5px;
+}
+
+
+
