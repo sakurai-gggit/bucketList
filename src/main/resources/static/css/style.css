@@ -74,3 +74,8 @@ header {
 .bi {
 	color: #88f1d6;
 }
+
+.task-button.is-done{
+	color: pink;
+	    background-color: white;
+}
