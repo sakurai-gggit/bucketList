@@ -4,6 +4,7 @@ body {
 	max-width: 500px;
 	width: 100%;
 	margin: 20px auto;
+	background-color: white;
 }
 
 li {
@@ -39,10 +40,11 @@ div {
 #tasks {
 	text-align: center;
 	margin: 30px auto;
+	padding-bottom: 30px;
 }
 
 header {
-	margin: 0 10px;
+	margin: 0 15px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -55,18 +57,25 @@ header {
 	border: none;
 	background-color: #88f1d6;
 }
-textarea{
+
+textarea {
 	appearance: none;
-	    border: none;
-	    background-color: #88f1d6;
+	border: none;
+	background-color: #88f1d6;
 }
-.input-form{
+
+.input-form {
 	appearance: none;
-	    border: none;
-	    color: white;
-	    background-color: #88f1d6;
-	    border-radius: 5px;
+	border: none;
+	color: white;
+	background-color: #88f1d6;
+	border-radius: 5px;
 }
+
+.bi {
+	color: #88f1d6;
+}
+
 
 
 
