@@ -56,16 +56,12 @@ header {
 	width: 100%;
 	color: white;
 	cursor: pointer;
-	appearance: none;
-	border: none;
 	background-color: #88f1d6;
 }
 
 
 .input-form {
-	resize: none;
-	appearance: none;
-	border: none;
+
 	color: white;
 	background-color: #88f1d6;
 	border-radius: 5px;
@@ -75,7 +71,28 @@ header {
 	color: #88f1d6;
 }
 
-.task-button.is-done{
+.task-button.is-done {
 	color: pink;
-	    background-color: white;
+	background-color: white;
+}
+
+.task-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.bi-pencil {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 15px;
+}
+
+input,
+textarea,
+button {
+	appearance: none;
+	border: none;
+	resize: none;
+	outline: none;
 }
