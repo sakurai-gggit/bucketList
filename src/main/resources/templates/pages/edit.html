@@ -39,8 +39,7 @@
 					</form>
 					<form method="post" th:action="@{/update}">
 						<input type="hidden" name="taskId" th:value="${task.taskId}">
-						<textarea class="edit-task" name="body" th:text="${task.body}"></textarea>
-						<button type="submit">確定</button>
+						<textarea class="edit-task" name="body" th:text="${task.body}" onblur="this.form.submit()"></textarea>
 					</form>
 				</article>
 			</li>
