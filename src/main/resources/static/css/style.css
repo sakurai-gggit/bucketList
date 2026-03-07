@@ -80,6 +80,7 @@ header {
 	display: flex;
 	align-items: center;
 	gap: 10px;
+	margin-left: 10px;
 }
 
 .bi-pencil {
