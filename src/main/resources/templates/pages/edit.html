@@ -20,7 +20,7 @@
 		</svg>
 	</a>
 
-	<section>
+	<section id="tasks">
 		<ul>
 			<li th:each="task : ${list}">
 
@@ -37,9 +37,9 @@
 							</svg>
 						</button>
 					</form>
-					<form method="post" th:action="@{/update}">
+					<form method="post" th:action="@{/update}" class="edit-task">
 						<input type="hidden" name="taskId" th:value="${task.taskId}">
-						<textarea class="edit-task" name="body" th:text="${task.body}" onblur="this.form.submit()"></textarea>
+						<textarea name="body" th:text="${task.body}" onblur="this.form.submit()"></textarea>
 					</form>
 				</article>
 			</li>

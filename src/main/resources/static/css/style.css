@@ -99,6 +99,11 @@ button {
 }
 
 .edit-task {
-	field-sizing: content;
+	margin: 5px;
+}
 
+.edit-task textarea {
+	width: 100%;
+	border: solid pink;
+	border-radius: 5px;
 }
