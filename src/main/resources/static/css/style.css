@@ -106,3 +106,6 @@ button {
 .header-edit{
 	justify-content: flex-end;
 }
+.header-menu{
+	justify-content: flex-start;
+}

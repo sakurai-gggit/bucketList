@@ -3,12 +3,24 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
+	<title>bucketList</title>
 </head>
 
 <body>
-	<h2>menu</h2>
-<a th:href="@{/main(order=${currentOrder})}">戻る</a>
+	<header class="header-menu">
+		<a th:href="@{/main(order=${currentOrder})}">
+			<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
+				fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+				<path fill-rule="evenodd"
+					d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5">
+				</path>
+			</svg>
+		</a>
+	</header>
 	<a th:href="@{/main(order=${currentOrder == 'status' ? 'default' : 'status'})}" class="btn">
 		<span th:text="${currentOrder =='status' ? 'ソート解除':'未達成タスクでソート'}"></span>
 	</a>
