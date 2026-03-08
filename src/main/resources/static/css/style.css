@@ -83,7 +83,6 @@ header {
 	margin-left: 10px;
 }
 
-
 input,
 textarea,
 button {
@@ -103,15 +102,65 @@ button {
 	border: solid pink;
 	border-radius: 5px;
 }
-.header-edit{
+
+.header-edit {
 	justify-content: flex-end;
 }
-.header-menu{
+
+.header-menu {
 	justify-content: flex-start;
 }
-.header-menu .bi{
+
+.header-menu .bi {
 	stroke: #88f1d6;
-	    stroke-width: 2px;
-	    fill: white;
-	    paint-order: stroke fill;
+	stroke-width: 2px;
+	fill: white;
+	paint-order: stroke fill;
+}
+
+.menu-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	border-top: 2px solid #88f1d6;
+	border-bottom: 2px solid #88f1d6;
+	margin: 30px auto;
+}
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 50px;
+	height: 28px;
+	background-color: #ccc;
+	border-radius: 100px;
+	transition: background-color 0.3s;
+	text-decoration: none;
+
+}
+
+.slider {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 22px;
+	height: 22px;
+	background-color: white;
+	border-radius: 50%;
+	transition: transform 0.3s;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.switch.active {
+	background-color: pink;
+}
+
+.switch.active .slider {
+	transform: translateX(22px);
+}
+
+.toggle-container {
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }

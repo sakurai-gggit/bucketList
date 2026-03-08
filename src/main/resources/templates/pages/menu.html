@@ -13,18 +13,21 @@
 <body>
 	<header class="header-menu">
 		<a th:href="@{/main(order=${currentOrder})}">
-			<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23"
-				fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+			<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-list"
+				viewBox="0 0 16 16">
 				<path fill-rule="evenodd"
 					d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5">
 				</path>
 			</svg>
 		</a>
 	</header>
-	<a th:href="@{/main(order=${currentOrder == 'status' ? 'default' : 'status'})}" class="btn">
-		<span th:text="${currentOrder =='status' ? 'ソート解除':'未達成タスクでソート'}"></span>
-	</a>
-
+	<div class="menu-row">
+		<p>未達成タスクを上に表示する</p>
+		<a th:href="@{/main(order=${currentOrder == 'status' ? 'default' : 'status'})}" class="switch"
+			th:classappend="${currentOrder=='status' ? 'active' : ''}">
+			<span class="slider"></span>
+		</a>
+	</div>
 </body>
 
 </html>
