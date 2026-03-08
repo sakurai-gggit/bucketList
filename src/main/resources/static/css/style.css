@@ -109,3 +109,9 @@ button {
 .header-menu{
 	justify-content: flex-start;
 }
+.header-menu .bi{
+	stroke: #88f1d6;
+	    stroke-width: 2px;
+	    fill: white;
+	    paint-order: stroke fill;
+}
