@@ -83,11 +83,6 @@ header {
 	margin-left: 10px;
 }
 
-.bi-pencil {
-	display: flex;
-	justify-content: flex-end;
-	margin-right: 15px;
-}
 
 input,
 textarea,
@@ -107,4 +102,7 @@ button {
 	width: 100%;
 	border: solid pink;
 	border-radius: 5px;
+}
+.header-edit{
+	justify-content: flex-end;
 }
