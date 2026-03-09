@@ -61,7 +61,6 @@ header {
 
 
 .input-form {
-
 	color: white;
 	background-color: #88f1d6;
 	border-radius: 5px;
@@ -185,6 +184,7 @@ button {
 	padding: 30px 50px;
 	border: 5px dotted #88f1d6;
 	border-radius: 5px;
+	color: #666666;
 }
 
 .logo {
@@ -199,4 +199,15 @@ button {
 .numerator {
 	border-bottom: 5px solid;
 	padding-bottom: 5px;
+}
+
+.top-button a {
+	border: 2px solid #88f1d6;
+	border-radius: 5px;
+	padding: 10px;
+	background-color: #ffffff;
+	color: #666666;
+	text-decoration: none;
+	margin: 10px 10px;
+	display: inline-block;
 }
