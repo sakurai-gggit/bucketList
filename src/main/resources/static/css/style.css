@@ -164,10 +164,9 @@ button {
 	gap: 10px;
 }
 
-.top-button {
+.top-button-container {
 	display: flex;
 	justify-content: space-evenly;
-
 }
 
 .top-contents {
@@ -201,7 +200,7 @@ button {
 	padding-bottom: 5px;
 }
 
-.top-button a {
+.top-button{
 	border: 2px solid #88f1d6;
 	border-radius: 5px;
 	padding: 10px;
@@ -212,7 +211,24 @@ button {
 	display: inline-block;
 }
 
-.top-button a:hover {
+.top-button:hover {
 	border: 3px solid #f8c5cf;
 	color: #f8c5cf;
+}
+
+.input-text {
+	background-color: #ffffff;
+	border: 1px solid;
+	border-radius: 5px;
+}
+
+.row {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	margin: 10px 0;
+}
+h2{
+	text-align: center;
 }
