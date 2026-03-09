@@ -3,31 +3,31 @@
 
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+	<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" th:href="@{/css/style.css}">
 	<title>bucketList</title>
 </head>
 
 <body>
-	<div class="users-new-wrapper" layout:fragment="contents">
-		<div class="container">
-			<div class="row p-form-top d-none d-lg-block d-xl-block d-xxl-block"></div>
-			<div class="row">
-				<main class="col-md-4 mx-auto">
-					<h1 class="text-center text-white">Log in</h1>
-					<form method="post" th:action="@{/login}">
-						<div class="mb-3">
-							<label class="form-label text-white" for="session_email">Email</label>
-							<input class="form-control" type="text" name="username" id="session_email" />
-						</div>
-						<div class="mb-3">
-							<label class="form-label text-white" for="session_password">Password</label>
-							<input class="form-control" type="password" name="password" id="session_password" />
-						</div>
-						<input type="submit" value="ログイン" class="btn w-100 btn-outline-light" />
-					</form>
-				</main>
-			</div>
+	<main class="top-contents">
+		<div class="top-wrapper">
+			<h2>Login</h2>
+			<form method="post" th:action="@{/login}">
+				<div class="row">
+					<label class="form-label text-white" for="session_email">Email</label>
+					<input class="input-text" type="text" name="username" id="session_email" />
+				</div>
+				<div class="row">
+					<label for="session_password">Password</label>
+					<input class="input-text" type="password" name="password" id="session_password" />
+				</div>
+				<input type="submit" value="ログイン" class="top-button" />
+			</form>
 		</div>
-	</div>
+	</main>
 </body>
 
 </html>
