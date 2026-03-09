@@ -248,3 +248,12 @@ h2 {
 	padding: 30px;
 	border: 5px dotted;
 }
+
+.row-password {
+	display: flex;
+	flex-direction: column;
+}
+
+.row-password span {
+	text-align: center;
+}
