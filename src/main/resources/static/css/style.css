@@ -126,7 +126,6 @@ button {
 	justify-content: space-evenly;
 	border-top: 2px solid #88f1d6;
 	border-bottom: 2px solid #88f1d6;
-	margin: 30px auto;
 }
 
 .switch {
@@ -257,4 +256,9 @@ h2 {
 
 .row-password span {
 	text-align: center;
+}
+
+.edit-menu-main {
+	background-color: #ffffff;
+	min-height: 100vh;
 }
