@@ -71,7 +71,7 @@ header {
 }
 
 .task-button.is-done {
-	color: pink;
+	color: #f8c5cf;
 	background-color: white;
 }
 
@@ -98,7 +98,7 @@ button {
 
 .edit-task textarea {
 	width: 100%;
-	border: solid pink;
+	border: solid #f8c5cf;
 	border-radius: 5px;
 }
 
@@ -151,7 +151,7 @@ button {
 }
 
 .switch.active {
-	background-color: pink;
+	background-color: #f8c5cf;
 }
 
 .switch.active .slider {
@@ -210,4 +210,9 @@ button {
 	text-decoration: none;
 	margin: 10px 10px;
 	display: inline-block;
+}
+
+.top-button a:hover {
+	border: 3px solid #f8c5cf;
+	color: #f8c5cf;
 }
