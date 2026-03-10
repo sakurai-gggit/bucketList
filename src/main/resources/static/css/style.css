@@ -126,6 +126,7 @@ button {
 	justify-content: space-evenly;
 	border-top: 2px solid #88f1d6;
 	border-bottom: 2px solid #88f1d6;
+	background-color: #ffffff;
 }
 
 .switch {
@@ -261,4 +262,6 @@ h2 {
 .edit-menu-main {
 	background-color: #ffffff;
 	min-height: 100vh;
+	background-image: linear-gradient(rgba(255, 255, 255, 0.5)), url(/images/upa23.png);
+	background-size: contain;
 }
