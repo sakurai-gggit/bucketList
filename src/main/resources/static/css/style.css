@@ -46,6 +46,8 @@ ul {
 #tasks {
 	text-align: center;
 	padding-bottom: 70px;
+	background-image: linear-gradient(rgba(255, 255, 255, 0.5)), url(/images/upa23.png);
+	background-size: contain;
 }
 
 header {
@@ -75,7 +77,7 @@ header {
 
 .task-button.is-done {
 	color: #f8c5cf;
-	background-color: white;
+	background-color: transparent;
 }
 
 .task-row {
