@@ -25,7 +25,7 @@
 	<main class="edit-menu-main">
 		<div class="menu-row">
 			<p>未達成タスクを上に表示する</p>
-			<a th:href="@{/main(order=${currentOrder == 'status' ? 'default' : 'status'})}" class="switch"
+			<a th:href="@{/menu(order=${currentOrder == 'status' ? 'default' : 'status'})}" class="switch"
 				th:classappend="${currentOrder=='status' ? 'active' : ''}">
 				<span class="slider"></span>
 			</a>
