@@ -107,6 +107,10 @@ button {
 	border-radius: 5px;
 }
 
+.edit-task textarea:focus {
+	background-color: #ffffff;
+}
+
 .header-edit {
 	justify-content: flex-end;
 }
