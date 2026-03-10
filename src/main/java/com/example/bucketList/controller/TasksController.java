@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.bucketList.entity.Task;
 import com.example.bucketList.entity.User;
 import com.example.bucketList.factory.TaskFactory;
+import com.example.bucketList.form.TaskForm;
 import com.example.bucketList.repository.TaskRepository;
 import com.example.bucketList.repository.UserRepository;
 
@@ -30,12 +31,12 @@ public class TasksController {
 	//	タスクを登録する
 	@PostMapping("/add")
 	public String taskCreate(@ModelAttribute("form") Task form, BindingResult result,
-			Model model, Principal principal, @RequestParam(name = "order", defaultValue = "default") String order) {
+			Model model, Principal principal, @ModelAttribute TaskForm taskForm) {
 		String email = principal.getName();
 		User currentUser = userRepository.findByUsername(email);
 		taskRepository.saveAndFlush(TaskFactory.createTask(form, currentUser));
 		model.addAttribute("form", TaskFactory.newTask());
-		model = this.setList(model, order);
+		model = this.setList(model, taskForm);
 
 		return "redirect:/main";
 	}
@@ -66,10 +67,10 @@ public class TasksController {
 	}
 
 	@GetMapping("/main")
-	public String mainPage(Model model, @RequestParam(name = "order", defaultValue = "default") String order) {
+	public String mainPage(Model model, @ModelAttribute TaskForm taskForm) {
 		model.addAttribute("form", TaskFactory.newTask());
-		model = this.setList(model, order);
-		model.addAttribute("currentOrder", order);
+		model = this.setList(model, taskForm);
+		model.addAttribute("currentOrder", taskForm.getOrder());
 		long totalTasks = taskRepository.count();
 		long completedTasks = taskRepository.countByCompletedTrue();
 		model.addAttribute("totalTasks", totalTasks);
@@ -78,20 +79,21 @@ public class TasksController {
 	}
 
 	@GetMapping("/edit")
-	public String editPage(Model model, @RequestParam(name = "order", defaultValue = "default") String order) {
+	public String editPage(Model model, @ModelAttribute TaskForm taskForm) {
 		model.addAttribute("form", TaskFactory.newTask());
-		model = this.setList(model, order);
+		model = this.setList(model, taskForm);
 		return "pages/edit";
 	}
 
 	@GetMapping("/menu")
-	public String menuPage(Model model, @RequestParam(name = "order", defaultValue = "default") String order) {
-		model.addAttribute("currentOrder", order);
+	public String menuPage(Model model, @ModelAttribute TaskForm taskForm) {
+		model.addAttribute("currentOrder", taskForm.getOrder());
 		return "pages/menu";
 	}
 
-	private Model setList(Model model, @RequestParam(name = "order", defaultValue = "default") String order) {
+	private Model setList(Model model, @ModelAttribute TaskForm taskForm) {
 		Sort sort;
+		String order = taskForm.getOrder();
 		if ("status".equals(order)) {
 			sort = Sort.by(Sort.Direction.ASC, "completed").and(Sort.by(Sort.Direction.ASC, "taskId"));
 		} else {
