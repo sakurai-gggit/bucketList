@@ -55,11 +55,12 @@ public class TasksController {
 
 	//	タスクを達成済み、未達成にする
 	@PostMapping("/completed")
+	@ResponseBody
 	public String toggleTask(@RequestParam Long taskId) {
 		Task task = getTask(taskId);
 		task.setCompleted(!task.isCompleted());
 		taskRepository.save(task);
-		return "redirect:/main";
+		return "ok";
 	}
 
 	//	タスクを削除する
