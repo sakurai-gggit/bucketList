@@ -41,7 +41,7 @@
 						</form>
 						<form method="post" th:action="@{/update}" class="edit-task">
 							<input type="hidden" name="taskId" th:value="${task.taskId}">
-							<textarea name="body" th:text="${task.body}" onblur="this.form.submit()"></textarea>
+							<textarea name="body" th:text="${task.body}" onblur="updateTask(this)"></textarea>
 						</form>
 					</article>
 				</li>
@@ -55,6 +55,24 @@
 			</div>
 		</form>
 	</main>
+	<script>
+		function updateTask(textarea) {
+			const form = textarea.form;
+			const formData = new FormData(form);
+			const url = "/update";
+
+			fetch(url, {
+				method: 'POST',
+				body: formData
+			})
+				.then(response => {
+					if (response.ok) {
+						console.log("保存に成功しました");
+					}
+				})
+				.catch(error => console.error("エラー:", error));
+		}
+	</script>
 </body>
 
 </html>
