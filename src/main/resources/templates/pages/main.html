@@ -37,7 +37,8 @@
 			<li th:each="task : ${list}">
 				<form method="post" th:action="@{/completed}">
 					<input type="hidden" name="taskId" th:value="${task.taskId}">
-					<button type="submit" class="task-button" th:classappend="${task.completed}?'is-done':''">
+					<button type="button" class="task-button" th:classappend="${task.completed}?'is-done':''"
+						th:onclick="|toggleTask(this, ${task.taskId})|">
 						<article class="task">
 							<pre class="body" th:text="${task.body}"></pre>
 						</article>
@@ -54,5 +55,23 @@
 		</div>
 	</form>
 </body>
+
+<script>
+	function toggleTask(button, taskId) {
+		const url = `/completed?taskId=${taskId}`;
+		const csrfToken = document.querySelector('input[name="_csrf"]')?.value;
+		fetch(url, {
+			method: 'POST',
+			headers: {'X-CSRF-TOKEN': csrfToken}
+		})
+			.then(response => {
+				if (response.ok) {
+					button.classList.toggle('is-done');
+					console.log("状態を更新しました");
+				}
+			})
+			.catch(error => console.error("通信エラー:", error));
+	}
+</script>
 
 </html>
