@@ -19,23 +19,25 @@
 				<div class="row">
 					<label for="user_email">Email</label>
 					<input type="text" class="input-text" th:field="*{email}" />
-					<p th:if="${#fields.hasErrors('email')}" class="error-message" th:errors="*{email}"></p>
 				</div>
+				<p th:if="${#fields.hasErrors('email')}" class="error-message" th:errors="*{email}"></p>
+
 				<div class="row">
 					<label for="user_password">Password</label>
 					<input class="input-text" type="password" th:field="*{password}" />
-					<p th:if="${#fields.hasErrors('password')}" class="error-message" th:errors="*{password}">
-					</p>
 				</div>
+				<p th:if="${#fields.hasErrors('password')}" class="error-message" th:errors="*{password}">
+				</p>
+
 				<div class="row">
 					<label for="user_password_confirmation" class="row-password">
 						Password
 						<span>(確認)</span></label>
 					<input type="password" class="input-text" th:field="*{passwordConfirmation}" />
-					<p th:if="${#fields.hasErrors('passwordConfirmation')}" class="error-message"
-						th:errors="*{passwordConfirmation}"></p>
-
 				</div>
+				<p th:if="${#fields.hasErrors('passwordConfirmation')}" class="error-message"
+					th:errors="*{passwordConfirmation}"></p>
+
 				<input type="submit" value="登録" class="top-button" />
 			</form>
 		</div>

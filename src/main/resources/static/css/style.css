@@ -285,3 +285,8 @@ svg.bi.bi-trash:hover {
 	stroke: #666666;
 	stroke-width: 0.5px;
 }
+
+p.error-message {
+    font-size: x-small;
+    color: #ed1818;
+	}
