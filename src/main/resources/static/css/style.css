@@ -81,6 +81,7 @@ header {
 .task-button.is-done {
 	color: #f8c5cf;
 	background-color: transparent;
+	animation: bounceIn 0.5s;
 }
 
 .task-row {
