@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -33,12 +34,12 @@ public class TasksController {
 	//	タスクを登録する
 	@PostMapping("/add")
 	public String taskCreate(@ModelAttribute("form") Task form, BindingResult result,
-			Model model, Principal principal, @ModelAttribute TaskForm taskForm) {
+			Model model, Principal principal, @ModelAttribute TaskForm taskForm,@AuthenticationPrincipal User user) {
 		String email = principal.getName();
 		User currentUser = userRepository.findByUsername(email);
 		taskRepository.saveAndFlush(TaskFactory.createTask(form, currentUser));
 		model.addAttribute("form", TaskFactory.newTask());
-		model = this.setList(model, taskForm);
+		model = this.setList(model, taskForm, user);
 
 		return "redirect:/main";
 	}
@@ -71,9 +72,9 @@ public class TasksController {
 	}
 
 	@GetMapping("/main")
-	public String mainPage(Model model, @ModelAttribute TaskForm taskForm) {
+	public String mainPage(Model model, @ModelAttribute TaskForm taskForm,@AuthenticationPrincipal User user) {
 		model.addAttribute("form", TaskFactory.newTask());
-		model = this.setList(model, taskForm);
+		model = this.setList(model, taskForm, user);
 		model.addAttribute("currentOrder", taskForm.getOrder());
 		long totalTasks = taskRepository.count();
 		long completedTasks = taskRepository.countByCompletedTrue();
@@ -83,9 +84,9 @@ public class TasksController {
 	}
 
 	@GetMapping("/edit")
-	public String editPage(Model model, @ModelAttribute TaskForm taskForm) {
+	public String editPage(Model model, @ModelAttribute TaskForm taskForm,@AuthenticationPrincipal User user) {
 		model.addAttribute("form", TaskFactory.newTask());
-		model = this.setList(model, taskForm);
+		model = this.setList(model, taskForm, user);
 		return "pages/edit";
 	}
 
@@ -95,7 +96,7 @@ public class TasksController {
 		return "pages/menu";
 	}
 
-	private Model setList(Model model, @ModelAttribute TaskForm taskForm) {
+	private Model setList(Model model, @ModelAttribute TaskForm taskForm,@AuthenticationPrincipal User user) {
 		Sort sort;
 		String order = taskForm.getOrder();
 		if ("status".equals(order)) {
@@ -103,7 +104,7 @@ public class TasksController {
 		} else {
 			sort = Sort.by(Sort.Direction.ASC, "taskId");
 		}
-		List<Task> list = taskRepository.findAll(sort);
+		List<Task> list = taskRepository.findByUser(user, sort);
 		model.addAttribute("list", list);
 		return model;
 	}
