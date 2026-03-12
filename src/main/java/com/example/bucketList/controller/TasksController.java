@@ -34,7 +34,7 @@ public class TasksController {
 	//	タスクを登録する
 	@PostMapping("/add")
 	public String taskCreate(@ModelAttribute("form") Task form, BindingResult result,
-			Model model, Principal principal, @ModelAttribute TaskForm taskForm,@AuthenticationPrincipal User user) {
+			Model model, Principal principal, @ModelAttribute TaskForm taskForm, @AuthenticationPrincipal User user) {
 		String email = principal.getName();
 		User currentUser = userRepository.findByUsername(email);
 		taskRepository.saveAndFlush(TaskFactory.createTask(form, currentUser));
@@ -72,19 +72,19 @@ public class TasksController {
 	}
 
 	@GetMapping("/main")
-	public String mainPage(Model model, @ModelAttribute TaskForm taskForm,@AuthenticationPrincipal User user) {
+	public String mainPage(Model model, @ModelAttribute TaskForm taskForm, @AuthenticationPrincipal User user) {
 		model.addAttribute("form", TaskFactory.newTask());
 		model = this.setList(model, taskForm, user);
 		model.addAttribute("currentOrder", taskForm.getOrder());
-		long totalTasks = taskRepository.count();
-		long completedTasks = taskRepository.countByCompletedTrue();
+		long totalTasks = taskRepository.countByUser(user);
+		long completedTasks = taskRepository.countByCompletedTrueAndUser(user);
 		model.addAttribute("totalTasks", totalTasks);
 		model.addAttribute("completedTasks", completedTasks);
 		return "pages/main";
 	}
 
 	@GetMapping("/edit")
-	public String editPage(Model model, @ModelAttribute TaskForm taskForm,@AuthenticationPrincipal User user) {
+	public String editPage(Model model, @ModelAttribute TaskForm taskForm, @AuthenticationPrincipal User user) {
 		model.addAttribute("form", TaskFactory.newTask());
 		model = this.setList(model, taskForm, user);
 		return "pages/edit";
@@ -96,7 +96,7 @@ public class TasksController {
 		return "pages/menu";
 	}
 
-	private Model setList(Model model, @ModelAttribute TaskForm taskForm,@AuthenticationPrincipal User user) {
+	private Model setList(Model model, @ModelAttribute TaskForm taskForm, @AuthenticationPrincipal User user) {
 		Sort sort;
 		String order = taskForm.getOrder();
 		if ("status".equals(order)) {
