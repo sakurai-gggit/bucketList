@@ -21,8 +21,10 @@
 					d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5">
 				</path>
 			</svg></a>
-		<div th:text="|${completedTasks} / ${totalTasks}|" class="task-score">
-			0/0
+		<div class="task-score">
+			<span th:text="${completedTasks}" id="completed-count">0</span>
+			/
+			<span th:text="${totalTasks}" id="total-count">0</span>
 		</div>
 		<a th:href="@{/edit}">
 			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-fill"
@@ -68,6 +70,13 @@
 			.then(response => {
 				if (response.ok) {
 					button.classList.toggle('is-done');
+					const completedErement = document.getElementById('completed-count');
+					let currentCount = parseInt(completedErement.innerText);
+					if (button.classList.contains('is-done')) {
+						completedErement.innerText = currentCount + 1;
+					} else {
+						completedErement.innerText = currentCount - 1;
+					}
 					console.log("状態を更新しました");
 				}
 			})
