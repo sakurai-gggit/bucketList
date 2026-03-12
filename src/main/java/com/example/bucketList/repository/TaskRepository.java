@@ -10,8 +10,10 @@ import com.example.bucketList.entity.User;
 
 public interface TaskRepository extends JpaRepository<Task, Long> {
 
+	long countByCompletedTrueAndUser(User user);
 
-	long countByCompletedTrue();
-	List<Task> findByUser(User user,Sort sort);
+	long countByUser(User user);
+
+	List<Task> findByUser(User user, Sort sort);
 
 }
