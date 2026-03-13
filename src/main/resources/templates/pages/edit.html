@@ -48,12 +48,7 @@
 			</ul>
 		</section>
 
-		<form method="post" action="#" th:action="@{/add}" th:object="${form}" id="footer-container">
-			<div class="form-inner">
-				<textarea th:field="*{body}" class="input-form"></textarea>
-				<button type="submit" class="input-form">送信</button>
-			</div>
-		</form>
+		<form th:replace="~{pages/main::add-form}"></form>
 	</main>
 	<script>
 		function updateTask(textarea) {

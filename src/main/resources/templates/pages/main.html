@@ -51,7 +51,7 @@
 		</ul>
 	</section>
 
-	<form method="post" action="#" th:action="@{/add}" th:object="${form}" id="footer-container">
+	<form method="post" action="#" th:action="@{/add}" th:object="${form}" id="footer-container" th:fragment="add-form">
 		<div class="form-inner">
 			<textarea th:field="*{body}" class="input-form"></textarea>
 			<button type="submit" class="input-form">送信</button>
