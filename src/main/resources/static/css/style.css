@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 body {
+	position: relative;
 	max-width: 480px;
 	width: 100%;
 	min-height: 100vh;
@@ -26,6 +27,10 @@ ul {
 	font-size: large;
 	font-weight: bold;
 	letter-spacing: 2px;
+}
+
+.task-score p {
+	display: none;
 }
 
 .form-inner {
@@ -287,6 +292,23 @@ svg.bi.bi-trash:hover {
 }
 
 p.error-message {
-    font-size: x-small;
-    color: #ed1818;
+	font-size: x-small;
+	color: #ed1818;
+}
+
+@media screen and (min-width:1200px) {
+	.task-score {
+		position: absolute;
+		width: 7rem;
+		top: 5rem;
+		right: calc(100% + 3rem);
+		color: #666666;
+		padding: 2rem;
+		background: white;
+		border: 5px dotted #666666;
 	}
+
+	.task-score p {
+		display: block;
+	}
+}
