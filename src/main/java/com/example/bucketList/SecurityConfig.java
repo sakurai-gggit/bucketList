@@ -43,7 +43,7 @@ public class SecurityConfig {
 				new AntPathRequestMatcher("/user"),
 				new AntPathRequestMatcher("/css/**"),
 				new AntPathRequestMatcher("/images/**"),
-				new AntPathRequestMatcher("/scripts/**"),
+				new AntPathRequestMatcher("/js/**"),
 				new AntPathRequestMatcher("/favicon.ico"));
 
 		// @formatter:off
