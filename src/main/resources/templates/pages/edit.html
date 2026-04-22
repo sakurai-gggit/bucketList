@@ -41,24 +41,6 @@
 
 			<form th:replace="~{pages/main::add-form}"></form>
 		</main>
-		<script>
-			function updateTask(textarea) {
-				const form = textarea.form;
-				const formData = new FormData(form);
-				const url = "/update";
-
-				fetch(url, {
-					method: 'POST',
-					body: formData
-				})
-					.then(response => {
-						if (response.ok) {
-							console.log("保存に成功しました");
-						}
-					})
-					.catch(error => console.error("エラー:", error));
-			}
-		</script>
 	</div>
 </body>
 
